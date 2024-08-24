@@ -1,11 +1,7 @@
-import { Button } from "@/components/ui/button";
-
-export default function Home() {
+export default function Page() {
   return (
-    <p className="text-red-500 font-bold">
-      <Button variant="custom">
-        Click Me
-      </Button>
+    <p>
+      Only auth users can see this
     </p>
   );
 }
