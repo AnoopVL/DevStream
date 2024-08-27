@@ -9,9 +9,9 @@ const font = Poppins({
 
 export const Logo = () => {
     return (
-        <div className="flex flex-col items-center gap-y-4">
+        <div className="flex flex-col items-center gap-y-2">
             <div className="bg-white rounded-full p-1">
-                <Image src="/penguin.svg" alt="DevStream" height="80" width="80" />
+                <Image src="/penguin.svg" alt="DevStream" height="50" width="50" />
             </div>
             <div className={cn(
                 "flex flex-col items-center",
