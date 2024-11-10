@@ -3,19 +3,24 @@
 import { Button } from "@/components/ui/button";
 import { onFollow } from "@/actions/follow";
 import { useTransition } from "react";
+import { toast } from "sonner";
 
 interface ActonsProps {
     isFollowing: boolean;
+    userId: string;
 };
 
 export const Actions = ({
     isFollowing,
+    userId,
 }: ActonsProps) => {
     const [isPending, startTransition] = useTransition();
 
     const onClick = () => {
         startTransition(() => {
-            onFollow("123");
+            onFollow(userId)
+                .then((data) => toast.success(`You are now following ${data.following.username}`))
+                .catch(() => toast.error("Something went wrong"));
         });
     };
 
