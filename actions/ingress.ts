@@ -7,6 +7,8 @@ import {
     IngressVideoEncodingPreset,
     RoomServiceClient,
     TrackSource,
+    IngressVideoOptions,
+    IngressAudioOptions,
     type CreateIngressOptions,
 } from "livekit-server-sdk";
 
@@ -22,10 +24,29 @@ const roomService = new RoomServiceClient(
 
 const ingressClient = new IngressClient(process.env.LIVEKIT_API_URL!);
 
+export const resetIngresses = async (hostIdentity: string) => {
+    const ingresses = await ingressClient.listIngress({
+        roomName: hostIdentity,
+    })
+
+    const rooms = await roomService.listRooms([hostIdentity]);
+
+    for (const room of rooms) {
+        await roomService.deleteRoom(room.name)
+    }
+
+    for (const ingress of ingresses) {
+        if (ingress.ingressId) {
+            await ingressClient.deleteIngress(ingress.ingressId);
+        }
+    }
+}
+
+
 export const createIngress = async (ingressType: IngressInput) => {
     const self = await getSelf();
 
-    //TODO: Reset previous ingress
+    await resetIngresses(self.id)
 
     const options: CreateIngressOptions = {
         name: self.username,
@@ -37,18 +58,20 @@ export const createIngress = async (ingressType: IngressInput) => {
     if (ingressType === IngressInput.WHIP_INPUT) {
         options.enableTranscoding = true;
     } else {
-        options.video = {
+        new IngressVideoOptions({
             source: TrackSource.CAMERA,
-            preset: IngressVideoEncodingPreset.H264_1080P_30FPS_3_LAYERS,
-            // encodingOptions: {
-            //     value: IngressVideoEncodingPreset.H264_1080P_30FPS_3_LAYERS,
-            //     case: "preset",
-            // },
-        };
-        options.audio = {
+            encodingOptions: {
+                case: "preset",
+                value: IngressVideoEncodingPreset.H264_1080P_30FPS_3_LAYERS,
+            }
+        });
+        new IngressAudioOptions({
             source: TrackSource.MICROPHONE,
-            preset: IngressAudioEncodingPreset.OPUS_STEREO_96KBPS,
-        };
+            encodingOptions: {
+                case: "preset",
+                value: IngressAudioEncodingPreset.OPUS_STEREO_96KBPS,
+            }
+        });
     };
 
     const ingress = await ingressClient.createIngress(
