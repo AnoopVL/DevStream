@@ -1,6 +1,14 @@
-const CreatorPage = () => {
+interface CreatorPageProps {
+    params: {
+        username: string;
+    };
+};
+
+const CreatorPage = async ({
+    params,
+}: CreatorPageProps) => {
     return (
-        <div>
+        <div className="h-full">
             Creator Page
         </div>
     );
