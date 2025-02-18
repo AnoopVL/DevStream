@@ -13,9 +13,23 @@ interface LiveVideoProps {
 export const LiveVideo = ({
     participant,
 }: LiveVideoProps) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
+
+    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [volume, setVolume] = useState(0);
+
+    useTracks([Track.Source.Camera, Track.Source.Microphone])
+        .filter((track) => track.participant.identity === participant.identity)
+        .forEach((track) => {
+            if (videoRef.current) {
+                track.publication.track?.attach(videoRef.current)
+            }
+        })
+
     return (
-        <div>
-            LiveVideo
+        <div ref={wrapperRef} className="relative h-full flex">
+            <video ref={videoRef} width="100%" />
         </div>
     )
 }
