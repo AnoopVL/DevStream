@@ -6,6 +6,7 @@ import { LiveKitRoom } from "@livekit/components-react"
 import { cn } from "@/lib/utils";
 import { useChatSidebar } from "@/store/use-chat-sidebar";
 import { Video } from "./video";
+import { Chat } from "./chat";
 
 interface StreamPlayerProps {
     user: User & { stream: Stream | null };
@@ -42,6 +43,19 @@ export const StreamPlayer = ({
             >
                 <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
                     <Video hostName={user.username} hostIdentity={user.id} />
+                </div>
+                <div className={cn(
+                    "col-span-1", collapsed && "hidden"
+                )}>
+                    <Chat
+                        viewerName={name}
+                        hostName={user.username}
+                        hostIdentity={user.id}
+                        isFollowing={isFollowing}
+                        isChatEnabled={stream.isChatEnabled}
+                        isChatDelayed={stream.isChatDelayed}
+                        isChatFollowersOnly={stream.isChatFollowersOnly}
+                    />
                 </div>
             </LiveKitRoom>
         </>
