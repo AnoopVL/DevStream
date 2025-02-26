@@ -1,7 +1,7 @@
 "use client";
 
 import { ReceivedChatMessage } from "@livekit/components-react";
-// import { ChatMessage } from "./chat-message";
+import { ChatMessage } from "./chat-message";
 import { Skeleton } from "../ui/skeleton";
 
 interface ChatListProps {
@@ -26,12 +26,12 @@ export const ChatList = ({
 
     return (
         <div className="flex flex-1 flex-col-reverse overflow-y-auto p-3 h-full">
-            {/* {message.map((message) => (
+            {message.map((message) => (
                 <ChatMessage
                     key={message.timestamp}
                     data={message}
                 />
-            ))} */}
+            ))}
         </div>
     )
 }
