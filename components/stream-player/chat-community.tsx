@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { useDebounceValue, DebouncedState } from "usehooks-ts";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-// import { CommunityItem } from "./community-item";
+import { CommunityItem } from "./community-item";
 import { LocalParticipant, RemoteParticipant } from "livekit-client";
 
 
@@ -61,9 +61,9 @@ export const ChatCommunity = ({
             />
             <ScrollArea className="gap-y-2 mt-4">
                 <p className="text-center text-sm text-muted-foreground hidden last:block p-2">
-                    NO Result
+                    No Result
                 </p>
-                {/* {filteredParticipants.map((participant) => (
+                {filteredParticipants.map((participant) => (
                     <CommunityItem
                         key={participant.identity}
                         hostName={hostName}
@@ -71,7 +71,7 @@ export const ChatCommunity = ({
                         participantName={participant.name}
                         participantIdentity={participant.identity}
                     />
-                ))} */}
+                ))}
             </ScrollArea>
         </div>
     )
