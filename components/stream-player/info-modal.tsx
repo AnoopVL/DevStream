@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import { updateStream } from "@/actions/stream";
 import { toast } from "sonner";
-// import { UploadDropzone } from "@/lib/uploadthing";
+import { UploadDropzone } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import { Hint } from "../hint";
 import { Trash } from "lucide-react";
@@ -125,7 +125,7 @@ export const InfoModal = ({
                             </div>
                         ) : (
                             <div className="rounded-xl border outline-dashed outline-muted">
-                                {/* <UploadDropzone
+                                <UploadDropzone
                                     endpoint="thumbnailUploader"
                                     appearance={{
                                         label: {
@@ -136,11 +136,11 @@ export const InfoModal = ({
                                         }
                                     }}
                                     onClientUploadComplete={(res) => {
-                                        setThumbnailUrl(res?.[0]?.url);
+                                        setThumbnailUrl(res?.[0]?.ufsUrl);
                                         router.refresh();
                                         closeRef?.current?.click();
                                     }}
-                                /> */}
+                                />
                             </div>
                         )}
                     </div>
