@@ -21,7 +21,7 @@ export const Logo = () => {
                     DevStream
                 </p>
                 <p className="text-sm text-muted-foreground">
-                    Let's Code
+                    Know Code
                 </p>
             </div>
         </div>

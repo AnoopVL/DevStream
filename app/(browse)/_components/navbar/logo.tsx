@@ -20,7 +20,7 @@ export const Logo = () => {
                     font.className
                 )}>
                     <p className="text-lg font-semibold">DevStream</p>
-                    <p className="text-xs text-muted-foreground">Let's Code</p>
+                    <p className="text-xs text-muted-foreground">Know Code</p>
                 </div>
             </div>
         </Link>
